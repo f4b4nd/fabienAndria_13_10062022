@@ -1,6 +1,6 @@
 import Navbar from "../components/navbar"
 import HeroContainer from "../containers/hero"
-import FeatureContainer from "../containers/feature"
+import FeaturesContainer from "../containers/features"
 import Footer from "../components/footer"
 
 export default function HomePage () {
@@ -10,10 +10,10 @@ export default function HomePage () {
 
             <HeroContainer />
 
-            <FeatureContainer />
+            <FeaturesContainer />
 
             <Footer />
-            
+
         </>
     )
 }
