@@ -1,5 +1,7 @@
-import React from "react"
 import { Link } from "react-router-dom"
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignOut, faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
 import Logo from "../../assets/logos/argentBankLogo.png"
 import { ROUTES } from "../../constants"
@@ -37,7 +39,7 @@ Navbar.User = ({userName}: {userName?: string}) => {
     return (
         <div className="navbar__user"> 
             <Link className="main-nav-item" to={ROUTES.USER}>
-                <i className="fa fa-user-circle"></i>
+                <FontAwesomeIcon icon={faUserCircle} />
                 {userName || null}
             </Link>
         </div>
@@ -48,7 +50,7 @@ Navbar.SignIn = () => {
     return (
         <div className="navbar__sign-in">
             <Link className="main-nav-item" to={ROUTES.SIGN_IN}>
-                <i className="fa fa-user-circle"></i>
+                <FontAwesomeIcon icon={faUserCircle} />
                 Sign In
             </Link>
         </div>
@@ -59,7 +61,7 @@ Navbar.SignOut = () => {
     return (
         <div className="navbar__sign-out">
             <Link className="main-nav-item" to={ROUTES.HOME}>
-                <i className="fa fa-sign-out"></i>
+                <FontAwesomeIcon icon={faSignOut} />
                 Sign Out
             </Link>
         </div>

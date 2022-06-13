@@ -1,6 +1,10 @@
 import styled from "styled-components"
 
-export const Container = styled.div<{backgroundImage: string}>`
+interface ContainerProps {
+    backgroundImage: string
+}
+
+export const Container = styled.div<ContainerProps>`
     
     background-image: url(${({backgroundImage}) => backgroundImage});
     background-position: 0 -50px;

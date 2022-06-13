@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router, Routes,  Route } from 'react-router-dom'
 
 import { ROUTES } from './constants'
@@ -8,7 +7,6 @@ import SignInPage from './pages/signIn'
 import UserPage from './pages/user'
 
 import './App.css'
-
 
 function App () {
     return (
