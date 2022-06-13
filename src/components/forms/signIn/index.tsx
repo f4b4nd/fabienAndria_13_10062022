@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
+
 import { ROUTES } from "../../../constants"
 
 import { Container, InputWrapper, CheckboxWrapper, Link, Button } from "./style"
@@ -7,8 +10,8 @@ const SignInForm: React.FC = () => {
     return (
         <Container className="sign-in-content">
 
-            <i className="fa fa-user-circle sign-in-icon"></i>
-
+            <FontAwesomeIcon icon={faUserCircle} className="sign-in-icon" />
+            
             <h1>Sign In</h1>
 
             <form>

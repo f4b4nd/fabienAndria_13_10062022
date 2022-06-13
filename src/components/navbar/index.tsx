@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom"
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignOut, faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
 import Logo from "../../assets/logos/argentBankLogo.png"
 import { ROUTES } from "../../constants"
+
+import { Container, Link } from "./style"
 
 interface Props {
     children?: React.ReactNode
@@ -12,13 +12,13 @@ interface Props {
 
 const Navbar = ({children}: Props) => {
     return (
-        <nav className="main-nav">
+        <Container className="main-nav">
             
             <Navbar.Logo />
 
             {children}
 
-        </nav>
+        </Container>
     )
 }
 

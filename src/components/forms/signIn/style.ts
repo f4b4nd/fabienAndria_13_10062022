@@ -1,7 +1,10 @@
 import styled from "styled-components"
+
 import { Link as RouterLink } from "react-router-dom"
+import { COLORS } from "../../../constants"
 
 export const Container = styled.section`
+
     box-sizing: border-box;
     background-color: white;
     width: 300px;
@@ -47,7 +50,7 @@ export const Button = styled.button`
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 1rem;
-    border-color: #00bc77;
-    background-color: #00bc77;
+    border-color: ${COLORS.green2};
+    background-color: ${COLORS.green2};
     color: #fff;
 `

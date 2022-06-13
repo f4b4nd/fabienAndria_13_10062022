@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+import { COLORS } from "../../constants"
+
 export const Container = styled.div`
     flex: 1;
     padding: 2.5rem;
@@ -25,7 +27,7 @@ export const Title = styled.h3`
 
 export const Image = styled.img`
     width: 100px;
-    border: 10px solid #00bc77;
+    border: 10px solid ${COLORS.green2};
     border-radius: 50%;
     padding: 1rem;
 `
