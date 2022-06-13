@@ -1,22 +1,24 @@
+import { Container, Group, Image, Title } from "./style"
+
 interface Props {
     children?: React.ReactNode
 }
 
 const Feature = ({children}: Props) => {
     return (
-        <div className="feature-item">
+        <Container className="feature-item">
             
             {children}
 
-        </div>
+        </Container>
     )
 }
 
 Feature.Group = ({children}: Props) => {
     return (
-        <section className="features">
+        <Group className="features">
             {children}
-        </section>
+        </Group>
     )
 }
 
@@ -28,7 +30,7 @@ Feature.GroupTitle = () => {
 
 Feature.Image = ({src, alt}: {src: string, alt: string}) => {
     return (
-        <img 
+        <Image 
             src={src} 
             alt={alt} 
             className="feature-icon" 
@@ -38,9 +40,9 @@ Feature.Image = ({src, alt}: {src: string, alt: string}) => {
 
 Feature.Title = ({children}: Props) => {
     return (
-        <h3 className="feature-item-title">
+        <Title className="feature-item-title">
             {children}
-        </h3>
+        </Title>
     )
 }
 
