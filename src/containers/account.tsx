@@ -21,7 +21,7 @@ const AccountContainer: React.FC = () => {
     ]
 
     return (
-        <Account.Group>
+        <>
             
             <Account.GroupHeader userName="Tony Jarvis" />
 
@@ -43,7 +43,7 @@ const AccountContainer: React.FC = () => {
                 </Account>       
             ))}
 
-        </Account.Group>
+        </>
     )
 }
 

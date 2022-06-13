@@ -12,8 +12,12 @@ const UserPage: React.FC = () => {
                 <Navbar.User userName="Tony" />
 
             </Navbar>
+            
+            <main className="main bg-dark">
+
+                <AccountContainer />
                 
-            <AccountContainer />
+            </main>
 
             <Footer />
         </>

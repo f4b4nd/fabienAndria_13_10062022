@@ -20,7 +20,6 @@ export const Container = styled.section`
     }
 
 `
-export const Group = styled.main``
 
 export const GroupHeader = styled.div`
     color: #fff;

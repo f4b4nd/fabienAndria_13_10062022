@@ -12,9 +12,13 @@ const HomePage: React.FC = () => {
 
             </Navbar>
 
-            <HeroComponent />
+            <main>
 
-            <FeaturesContainer />
+                <HeroComponent />
+
+                <FeaturesContainer />
+
+            </main>
 
             <Footer />
 

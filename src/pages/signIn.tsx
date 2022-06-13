@@ -12,7 +12,11 @@ const SignInPage: React.FC = () => {
 
             </Navbar>
 
-            <SignInForm />
+            <main className="main bg-dark">
+
+                <SignInForm />
+                
+            </main>
 
             <Footer />
 

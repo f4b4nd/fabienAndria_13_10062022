@@ -1,4 +1,4 @@
-import { Group, GroupHeader, Container,  Wrapper, Title, Text, Button } from "./style"
+import { GroupHeader, Container,  Wrapper, Title, Text, Button } from "./style"
 
 interface Props {
     children?: React.ReactNode
@@ -18,11 +18,6 @@ const Account = ({children}: Props) => {
     )
 }
 
-Account.Group = ({children}: Props) => {
-    return (
-        <Group className="main bg-dark"> {children} </Group>
-    )
-}
 
 Account.GroupHeader = ({userName}: {userName?: string}) => {
     return (
