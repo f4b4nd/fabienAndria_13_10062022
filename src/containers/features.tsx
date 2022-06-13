@@ -1,4 +1,5 @@
 import Feature from "../components/feature"
+
 import ChatIcon from "../assets/icons/icon-chat.png"
 import MoneyIcon from "../assets/icons/icon-money.png"
 import SecurityIcon from "../assets/icons/icon-security.png"
