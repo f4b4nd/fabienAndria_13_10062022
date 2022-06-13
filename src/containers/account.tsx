@@ -1,4 +1,4 @@
-export default function AccountContainer () {
+const AccountContainer: React.FC = () => {
     return (
         <>
         <main className="main bg-dark">
@@ -48,3 +48,5 @@ export default function AccountContainer () {
         </>
     )
 }
+
+export default AccountContainer

@@ -1,7 +1,9 @@
 import Hero from "../components/hero"
 
-export default function HeroContainer () {
+const HeroContainer: React.FC = () => {
     return (
         <Hero />
     )
 }
+
+export default HeroContainer

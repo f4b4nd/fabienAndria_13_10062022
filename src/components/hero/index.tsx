@@ -1,4 +1,4 @@
-export default function Hero () {
+const Hero: React.FC = () => {
     return (
         <div className="hero">
             <section className="hero-content">
@@ -11,3 +11,5 @@ export default function Hero () {
         </div>
     )
 }
+
+export default Hero

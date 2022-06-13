@@ -1,12 +1,16 @@
 import Footer from "../components/footer"
-import SignInForm from "../components/forms/signInForm"
+import SignInForm from "../components/forms/signIn"
 import Navbar from "../components/navbar"
 
-export default function SignInPage () {
+const SignInPage: React.FC = () => {
     return (
         <>
 
-            <Navbar />
+            <Navbar>
+
+                <Navbar.SignIn />
+
+            </Navbar>
 
             <SignInForm />
 
@@ -15,3 +19,5 @@ export default function SignInPage () {
         </>
     )
 }
+
+export default SignInPage

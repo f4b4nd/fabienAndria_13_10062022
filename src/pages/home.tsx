@@ -3,10 +3,14 @@ import HeroContainer from "../containers/hero"
 import FeaturesContainer from "../containers/features"
 import Footer from "../components/footer"
 
-export default function HomePage () {
+const HomePage: React.FC = () => {
     return (
         <>
-            <Navbar />
+            <Navbar>
+                
+                <Navbar.SignIn />
+
+            </Navbar>
 
             <HeroContainer />
 
@@ -17,3 +21,5 @@ export default function HomePage () {
         </>
     )
 }
+
+export default HomePage

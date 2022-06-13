@@ -1,12 +1,55 @@
-export default function Feature () {
+interface Props {
+    children?: React.ReactNode
+}
+
+const Feature = ({children}: Props) => {
     return (
         <div className="feature-item">
-            <img src="./img/icon-chat.png" alt="Chat Icon" className="feature-icon" />
-            <h3 className="feature-item-title">You are our #1 priority</h3>
-            <p>
-              Need to talk to a representative? You can get in touch through our
-              24/7 chat or through a phone call in less than 5 minutes.
-            </p>
+            
+            {children}
+
         </div>
     )
 }
+
+Feature.Group = ({children}: Props) => {
+    return (
+        <section className="features">
+            {children}
+        </section>
+    )
+}
+
+Feature.GroupTitle = () => {
+    return (
+        <h2 className="sr-only">Features</h2>
+    )
+}
+
+Feature.Image = ({src, alt}: {src: string, alt: string}) => {
+    return (
+        <img 
+            src={src} 
+            alt={alt} 
+            className="feature-icon" 
+        />
+    )
+}
+
+Feature.Title = ({children}: Props) => {
+    return (
+        <h3 className="feature-item-title">
+            {children}
+        </h3>
+    )
+}
+
+Feature.Description = ({children}: Props) => {
+    return (
+        <p className="feature-item-description">
+            {children}
+        </p>
+    )
+}
+
+export default Feature

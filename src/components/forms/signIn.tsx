@@ -1,4 +1,4 @@
-export default function SignInForm () {
+const SignInForm: React.FC = () => {
     return (
         <section className="sign-in-content">
 
@@ -31,3 +31,5 @@ export default function SignInForm () {
       </section>
     )
 }
+
+export default SignInForm

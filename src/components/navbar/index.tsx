@@ -1,24 +1,69 @@
-import Logo from "../../assets/logos/argentBankLogo.png"
+import React from "react"
+import { Link } from "react-router-dom"
 
-export default function Navbar () {
+import Logo from "../../assets/logos/argentBankLogo.png"
+import { ROUTES } from "../../constants"
+
+interface Props {
+    children?: React.ReactNode
+}
+
+const Navbar = ({children}: Props) => {
     return (
         <nav className="main-nav">
             
-            <a className="main-nav-logo" href="./index.html">
-                <img
-                    className="main-nav-logo-image"
-                    src={Logo}
-                    alt="Argent Bank Logo"
-                />
-                <h1 className="sr-only">Argent Bank</h1>
-            </a>
+            <Navbar.Logo />
 
-            <div>
-                <a className="main-nav-item" href="./sign-in.html">
-                    <i className="fa fa-user-circle"></i>
-                    Sign In
-                </a>
-            </div>
+            {children}
+
         </nav>
     )
 }
+
+Navbar.Logo = () => {
+    return (
+        <Link className="main-nav-logo" to={ROUTES.HOME}>
+            <img
+                className="main-nav-logo-image"
+                src={Logo}
+                alt="Argent Bank Logo"
+            />
+            <h1 className="sr-only">Argent Bank</h1>
+        </Link>
+    )
+}
+
+Navbar.User = ({userName}: {userName?: string}) => {
+    return (
+        <div className="navbar__user"> 
+            <Link className="main-nav-item" to={ROUTES.USER}>
+                <i className="fa fa-user-circle"></i>
+                {userName || null}
+            </Link>
+        </div>
+    )
+}
+
+Navbar.SignIn = () => {
+    return (
+        <div className="navbar__sign-in">
+            <Link className="main-nav-item" to={ROUTES.SIGN_IN}>
+                <i className="fa fa-user-circle"></i>
+                Sign In
+            </Link>
+        </div>
+    )
+}
+
+Navbar.SignOut = () => {
+    return (
+        <div className="navbar__sign-out">
+            <Link className="main-nav-item" to={ROUTES.HOME}>
+                <i className="fa fa-sign-out"></i>
+                Sign Out
+            </Link>
+        </div>
+    )
+}
+
+export default Navbar
