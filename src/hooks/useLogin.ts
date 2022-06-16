@@ -1,28 +1,26 @@
 export let a = ""
-/*
 
-
-interface IUseFetch {
-    (endpoint: IEndpoint): ObjectProps
-}
-
-
-import { useState, useEffect } from "react"
+/*import { useState, useEffect } from "react"
 
 import { fetchData } from "."
 
-const useFetch: IUseFetch = (endpoint) => {
+const useLogin = (email: string, password: string) => {
     
     const [responseData, setResponseData] = useState({} as ObjectProps)
 
     useEffect(() => {
+
+        const endpoint = IEndpoint.LOGIN
         const headers = {}
+
         fetchData(endpoint, headers, setResponseData)
-    }, [endpoint])
+
+    }, [])
 
     return responseData
 
 }
  
-export default useFetch
+export default useLogin
+
 */

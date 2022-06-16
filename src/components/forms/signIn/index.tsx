@@ -1,18 +1,36 @@
-import { useCallback } from "react"
+import { useCallback, useState, useEffect } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
-import { ROUTES } from "../../../constants"
-
-import { Container, InputWrapper, CheckboxWrapper, Link, Button } from "./style"
+import { Container, InputWrapper, CheckboxWrapper, Button } from "./style"
 import { userSelector } from "../../../store/useSelectors"
 import { loginUserAction } from "../../../store/userActions"
 
+import loginApi from "../../../helpers/loginAPI"
 
-const SignInForm = ({user, login}: {user: IUser, login: any}) => {
+const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}) => {
+
+    const [emailInput, setEmailInput] = useState("" as string)
+    const [passwordInput, setPasswordInput] = useState("" as string)
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        
+        e.preventDefault()
+
+        if (emailInput === "" || passwordInput === "") return
+
+        const response = await loginApi(emailInput, passwordInput)
+
+        console.log('reponse', response)
+
+        loginStore({...userStore, token: response?.body?.token })
+
+    }
+
+
     return (
         <Container className="sign-in-content">
 
@@ -24,12 +42,12 @@ const SignInForm = ({user, login}: {user: IUser, login: any}) => {
                 
                 <InputWrapper className="input-wrapper">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" />
+                    <input type="text" id="username" value={emailInput} onChange={(e) => setEmailInput(e.target.value)}/>
                 </InputWrapper>
 
                 <InputWrapper className="input-wrapper">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" />
+                    <input type="password" id="password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)}/>
                 </InputWrapper>
 
                 <CheckboxWrapper className="input-remember">
@@ -37,9 +55,7 @@ const SignInForm = ({user, login}: {user: IUser, login: any}) => {
                     <label htmlFor="remember-me" >Remember me</label>
                 </CheckboxWrapper>
 
-                <Link to={ROUTES.USER}>                    
-                    <Button className="sign-in-button" onClick={() => login(user)}> Sign In </Button>    
-                </Link>
+                <Button className="sign-in-button" onClick={(e) => handleSubmit(e)}> Sign In </Button>    
         
             </form>
 
@@ -49,15 +65,15 @@ const SignInForm = ({user, login}: {user: IUser, login: any}) => {
 
 const SignInFormStore: React.FC = () => {
     
-    const user = useSelector(userSelector)
+    const userStore = useSelector(userSelector)
 
     const dispatch = useDispatch()
 
-    const login = useCallback((user: IUser) => {
+    const loginStore = useCallback((user: IUser) => {
         dispatch(loginUserAction(user))
     }, [dispatch])
 
-    return <SignInForm user={user} login={login} />
+    return <SignInForm userStore={userStore} loginStore={loginStore} />
 
 }
 

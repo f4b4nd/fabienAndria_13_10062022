@@ -4,7 +4,7 @@ export const loginUserAction: ILoginUserAction = (user) => {
         payload: {
             ...user,
             email: user.email,
-            token : "1234"
+            token : user.token
         }
     }
 }

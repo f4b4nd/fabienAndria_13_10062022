@@ -1,6 +1,6 @@
+import Navbar from "../components/navbar"
 import Footer from "../components/footer"
 import { SignInFormStore } from "../components/forms/signIn"
-import Navbar from "../components/navbar"
 
 const SignInPage: React.FC = () => {
     return (
