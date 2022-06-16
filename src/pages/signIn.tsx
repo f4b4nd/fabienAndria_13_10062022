@@ -1,5 +1,5 @@
 import Footer from "../components/footer"
-import SignInForm from "../components/forms/signIn"
+import { SignInFormStore } from "../components/forms/signIn"
 import Navbar from "../components/navbar"
 
 const SignInPage: React.FC = () => {
@@ -14,7 +14,7 @@ const SignInPage: React.FC = () => {
 
             <main className="main bg-dark">
 
-                <SignInForm />
+                <SignInFormStore />
                 
             </main>
 

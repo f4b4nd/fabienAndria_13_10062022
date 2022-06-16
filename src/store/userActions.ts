@@ -1,10 +1,10 @@
-export function loginUserAction (user: IUser): Action {
+export const loginUserAction: ILoginUserAction = (user) => {
     return {
-        type: ActionType['LOGIN'],
+        type: 'USER_LOG_IN' as ActionType.LOGIN,
         payload: {
             ...user,
             email: user.email,
-            token : user.token
+            token : "1234"
         }
     }
 }

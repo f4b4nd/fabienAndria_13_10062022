@@ -1,5 +1,1 @@
-let userSelector: IUserSelector
-
-userSelector = ({user}) => user
-
-export { userSelector }
+export const userSelector: IUserSelector = ({user}) => user

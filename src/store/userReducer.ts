@@ -5,9 +5,7 @@ const initialState: IUser = {
     token: ""
 }
 
-let userReducer: IUserReducer
-
-userReducer = function (state = initialState, action) {
+export const userReducer: IUserReducer = function (state = initialState, action) {
     switch (action.type) {
 
         case 'USER_LOG_IN':
@@ -17,5 +15,3 @@ userReducer = function (state = initialState, action) {
             return state
     }
 }
-
-export { userReducer }
