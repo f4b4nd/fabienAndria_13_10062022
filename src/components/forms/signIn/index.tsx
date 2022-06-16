@@ -15,7 +15,7 @@ import loginAPI from "../../../helpers/loginAPI"
 
 import { ROUTES } from "../../../constants"
 
-const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}) => {
+const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: ILoginStore}) => {
 
     const [emailInput, setEmailInput] = useState("" as string)
     const [passwordInput, setPasswordInput] = useState("" as string)
@@ -100,7 +100,7 @@ const SignInFormStore: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const loginStore = useCallback((user: IUser) => {
+    const loginStore: ILoginStore = useCallback((user: IUser) => {
         dispatch(loginUserAction(user))
     }, [dispatch])
 

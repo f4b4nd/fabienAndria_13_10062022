@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,13 +11,35 @@ import { Container, Link } from "./style"
 
 import { userSelector } from '../../store/useSelectors'
 import { logoutUserAction } from '../../store/userActions'
+import fetchProfileAPI from '../../helpers/fetchProfileAPI'
 
 interface Props {
     children?: React.ReactNode
 }
 
 const Navbar = function NavBarComponent ({children}: Props) {
+
+    const [userName, setUserName] = useState("" as string)
+
     const user = useSelector(userSelector)
+
+    useEffect(() => {
+
+        async function getProfile () {
+            console.log('navbar')
+            const response = await fetchProfileAPI(user.token)
+
+            if (response?.status === 200) {
+                const firstName = response?.body?.firstName || ""
+                setUserName(firstName)
+            }
+
+        }
+        
+        getProfile()
+
+    }, [user.token])
+
 
     return (
         <Container className="main-nav">
@@ -26,12 +48,12 @@ const Navbar = function NavBarComponent ({children}: Props) {
 
             {children}
 
-            {user.isLogged && <Navbar.User userName={user.email} />}
+            {user.isLogged && <Navbar.User userName={userName}/>}
 
             {!user.isLogged && <Navbar.SignIn /> }
 
             {user.isLogged && <Navbar.SignOut /> }
-            
+
         </Container>
     )
 }
@@ -49,12 +71,12 @@ Navbar.Logo = () => {
     )
 }
 
-Navbar.User = ({userName}: {userName?: string}) => {
+Navbar.User = ({userName}: {userName: string}) => {
     return (
         <div className="navbar__user"> 
             <Link className="main-nav-item" to={ROUTES.DASHBOARD}>
                 <FontAwesomeIcon icon={faUserCircle} />
-                {userName || null}
+                {userName}
             </Link>
         </div>
     )
