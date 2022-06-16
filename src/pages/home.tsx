@@ -6,11 +6,7 @@ import Footer from "../components/footer"
 const HomePage: React.FC = () => {
     return (
         <>
-            <Navbar>
-                
-                <Navbar.SignIn />
-
-            </Navbar>
+            <Navbar />
 
             <main>
 

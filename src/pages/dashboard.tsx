@@ -5,13 +5,7 @@ import Navbar from "../components/navbar"
 const DashboardPage: React.FC = () => {
     return (
         <>
-            <Navbar>
-
-                <Navbar.SignOut />
-
-                <Navbar.User userName="Tony" />
-
-            </Navbar>
+            <Navbar />
             
             <main className="main bg-dark">
 

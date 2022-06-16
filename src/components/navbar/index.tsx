@@ -16,7 +16,9 @@ interface Props {
     children?: React.ReactNode
 }
 
-const Navbar = ({children}: Props) => {
+const Navbar = function NavBarComponent ({children}: Props) {
+    const user = useSelector(userSelector)
+
     return (
         <Container className="main-nav">
             
@@ -24,6 +26,12 @@ const Navbar = ({children}: Props) => {
 
             {children}
 
+            {user.isLogged && <Navbar.User userName={user.email} />}
+
+            {!user.isLogged && <Navbar.SignIn /> }
+
+            {user.isLogged && <Navbar.SignOut /> }
+            
         </Container>
     )
 }

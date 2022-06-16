@@ -6,12 +6,8 @@ const SignInPage: React.FC = () => {
     return (
         <>
 
-            <Navbar>
-
-                <Navbar.SignIn />
-
-            </Navbar>
-
+            <Navbar />
+            
             <main className="main bg-dark">
 
                 <SignInFormStore />
