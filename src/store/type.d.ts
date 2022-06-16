@@ -30,3 +30,7 @@ interface IUserSelector {
 interface ILoginUserAction {
     (user: IUser): Action
 }
+
+interface ILogoutUserAction {
+    (user: IUser): Action
+}

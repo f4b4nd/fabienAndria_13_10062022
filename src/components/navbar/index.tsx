@@ -1,3 +1,6 @@
+import React, { useCallback } from 'react'
+import { useSelector, useDispatch} from 'react-redux'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignOut, faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
@@ -5,6 +8,9 @@ import Logo from "../../assets/logos/argentBankLogo.png"
 import { ROUTES } from "../../constants"
 
 import { Container, Link } from "./style"
+
+import { userSelector } from '../../store/useSelectors'
+import { logoutUserAction } from '../../store/userActions'
 
 interface Props {
     children?: React.ReactNode
@@ -57,13 +63,31 @@ Navbar.SignIn = () => {
     )
 }
 
-Navbar.SignOut = () => {
+Navbar.SignOut = function SignoutComponent () {
+
+    const user = useSelector(userSelector)
+
+    const dispatch = useDispatch()
+
+    const logout = useCallback((user: IUser) => {
+        dispatch(logoutUserAction(user))
+    }, [dispatch])
+
     return (
         <div className="navbar__sign-out">
-            <Link className="main-nav-item" to={ROUTES.HOME}>
+
+            <Link 
+                className="main-nav-item" 
+                to={ROUTES.HOME} 
+                onClick={() => logout(user)} 
+            >
+
                 <FontAwesomeIcon icon={faSignOut} />
+
                 Sign Out
+
             </Link>
+            
         </div>
     )
 }

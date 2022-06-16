@@ -8,3 +8,14 @@ export const loginUserAction: ILoginUserAction = (user) => {
         }
     }
 }
+
+export const logoutUserAction: ILogoutUserAction = (user) => {
+    return {
+        type: 'USER_LOG_OUT' as ActionType.LOGOUT,
+        payload: {
+            ...user,
+            email: "",
+            token: ""
+        }
+    }
+}
