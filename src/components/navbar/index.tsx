@@ -44,7 +44,7 @@ Navbar.Logo = () => {
 Navbar.User = ({userName}: {userName?: string}) => {
     return (
         <div className="navbar__user"> 
-            <Link className="main-nav-item" to={ROUTES.USER}>
+            <Link className="main-nav-item" to={ROUTES.DASHBOARD}>
                 <FontAwesomeIcon icon={faUserCircle} />
                 {userName || null}
             </Link>

@@ -20,11 +20,11 @@ interface Action {
 }
 
 interface IUserReducer {
-    (state: User | undefined, action: Action): User
+    (state: IUser | undefined, action: Action): IUser
 }
 
 interface IUserSelector {
-    ({user}: {user: User}): User 
+    ({user}: {user: IUser}): IUser 
 }
 
 interface ILoginUserAction {

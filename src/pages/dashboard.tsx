@@ -2,7 +2,7 @@ import Footer from "../components/footer"
 import AccountContainer from "../containers/account"
 import Navbar from "../components/navbar"
 
-const UserPage: React.FC = () => {
+const DashboardPage: React.FC = () => {
     return (
         <>
             <Navbar>
@@ -24,4 +24,4 @@ const UserPage: React.FC = () => {
     )
 }
 
-export default UserPage
+export default DashboardPage

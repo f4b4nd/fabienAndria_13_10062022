@@ -1,10 +1,12 @@
+import { ENDPOINTS_API } from "../constants"
+
 const loginAPI: ILoginAPI = async (email, password) => {
 
     const apiURL = process.env.REACT_APP_API_URL
 
     if (!apiURL) return
 
-    const endpoint = "/user/login" as IEndpoint.LOGIN
+    const endpoint = ENDPOINTS_API.LOGIN
 
     const requestOptions = {
         method: 'POST',

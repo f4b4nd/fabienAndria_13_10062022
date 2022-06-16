@@ -1,4 +1,6 @@
-import { useCallback, useState, useEffect } from "react"
+import { useCallback, useState } from "react"
+
+import { Navigate } from "react-router-dom"
 
 import { useDispatch, useSelector } from "react-redux"
 
@@ -11,10 +13,13 @@ import { loginUserAction } from "../../../store/userActions"
 
 import loginApi from "../../../helpers/loginAPI"
 
+import { ROUTES } from "../../../constants"
+
 const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}) => {
 
     const [emailInput, setEmailInput] = useState("" as string)
     const [passwordInput, setPasswordInput] = useState("" as string)
+    const [isRedirectedToDashboard, setIsRedirectedToDashboard] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent) => {
         
@@ -28,10 +33,17 @@ const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}
 
         loginStore({...userStore, token: response?.body?.token })
 
+        if (response?.status === 200) {
+            setIsRedirectedToDashboard(true)
+        }
+
     }
 
 
     return (
+        <>
+        { isRedirectedToDashboard && <Navigate to={ROUTES.DASHBOARD} /> }
+
         <Container className="sign-in-content">
 
             <FontAwesomeIcon icon={faUserCircle} className="sign-in-icon" />
@@ -60,6 +72,7 @@ const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}
             </form>
 
         </Container>
+        </>
     )
 }
 

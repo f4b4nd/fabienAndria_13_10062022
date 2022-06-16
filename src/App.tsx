@@ -4,7 +4,7 @@ import { ROUTES } from './constants'
 
 import HomePage from './pages/home'
 import SignInPage from './pages/signIn'
-import UserPage from './pages/user'
+import DashboardPage from './pages/dashboard'
 
 import './App.css'
 
@@ -18,7 +18,7 @@ function App () {
 
                 <Route path={ROUTES.SIGN_IN} element={ <SignInPage /> }/>
 
-                <Route path={ROUTES.USER} element={ <UserPage /> }/>
+                <Route path={ROUTES.DASHBOARD} element={ <DashboardPage /> }/>
 
             </Routes>
 
