@@ -63,7 +63,7 @@ Navbar.SignIn = () => {
     )
 }
 
-Navbar.SignOut = function SignoutComponent () {
+Navbar.SignOut = function SignoutStore () {
 
     const user = useSelector(userSelector)
 
@@ -87,7 +87,7 @@ Navbar.SignOut = function SignoutComponent () {
                 Sign Out
 
             </Link>
-            
+
         </div>
     )
 }
