@@ -27,8 +27,8 @@ const AccountContainer: React.FC = () => {
 
             <h2 className="sr-only">Accounts</h2>
 
-            {response && response.map((item, key)=> (
-                <Account key={key}>
+            {response && response.map((item, idx) => (
+                <Account key={idx}>
 
                     <Account.Wrapper className="account-content-wrapper">
                         <Account.Title> {item.title} </Account.Title>
