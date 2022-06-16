@@ -1,8 +1,7 @@
 const initialState: IUser = {
-    id: "",
     email: "",
-    password: "",
-    token: ""
+    token: "",
+    isLogged: false
 }
 
 export const userReducer: IUserReducer = function (state = initialState, action) {

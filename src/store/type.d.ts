@@ -1,8 +1,7 @@
 interface IUser {
     email: string,
-    password: string,
-    id: string,
-    token: string
+    token: string,
+    isLogged: boolean
 }
 
 enum ActionType {

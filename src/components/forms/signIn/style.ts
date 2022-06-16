@@ -16,6 +16,10 @@ export const Container = styled.section`
         font-size: 5rem;
     }
 
+    .error-login {
+        color: red;
+    }
+    
 `
 
 export const InputWrapper = styled.div`

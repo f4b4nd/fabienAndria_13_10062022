@@ -11,7 +11,7 @@ import { Container, InputWrapper, CheckboxWrapper, Button } from "./style"
 import { userSelector } from "../../../store/useSelectors"
 import { loginUserAction } from "../../../store/userActions"
 
-import loginApi from "../../../helpers/loginAPI"
+import loginAPI from "../../../helpers/loginAPI"
 
 import { ROUTES } from "../../../constants"
 
@@ -19,7 +19,8 @@ const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}
 
     const [emailInput, setEmailInput] = useState("" as string)
     const [passwordInput, setPasswordInput] = useState("" as string)
-    const [isRedirectedToDashboard, setIsRedirectedToDashboard] = useState(false)
+    const [loginIsIncorrect, setLoginIsIncorrect] = useState(false as boolean)
+    const [isRedirectedToDashboard, setIsRedirectedToDashboard] = useState(false as boolean)
 
     const handleSubmit = async (e: React.FormEvent) => {
         
@@ -27,18 +28,27 @@ const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}
 
         if (emailInput === "" || passwordInput === "") return
 
-        const response = await loginApi(emailInput, passwordInput)
+        const response = await loginAPI(emailInput, passwordInput)
 
         console.log('reponse', response)
 
-        loginStore({...userStore, token: response?.body?.token })
-
-        if (response?.status === 200) {
-            setIsRedirectedToDashboard(true)
+        if (response?.status !== 200) {
+            setLoginIsIncorrect(true)
+            return
         }
 
-    }
+        const newUserState: IUser = {
+            ...userStore,
+            email: emailInput,
+            token: response?.body?.token || "", 
+            isLogged: true
+        }
 
+        loginStore(newUserState)
+        setLoginIsIncorrect(false)
+        setIsRedirectedToDashboard(true)
+
+    }
 
     return (
         <>
@@ -66,6 +76,8 @@ const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}
                     <input type="checkbox" id="remember-me" />
                     <label htmlFor="remember-me" >Remember me</label>
                 </CheckboxWrapper>
+
+                {loginIsIncorrect && <pre className="error-login"> Identifiants incorrects </pre>}
 
                 <Button className="sign-in-button" onClick={(e) => handleSubmit(e)}> Sign In </Button>    
         
