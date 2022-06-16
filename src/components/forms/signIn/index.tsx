@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import { Navigate } from "react-router-dom"
 
@@ -21,6 +21,12 @@ const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: any}
     const [passwordInput, setPasswordInput] = useState("" as string)
     const [loginIsIncorrect, setLoginIsIncorrect] = useState(false as boolean)
     const [isRedirectedToDashboard, setIsRedirectedToDashboard] = useState(false as boolean)
+    
+    useEffect(() => {
+        if (userStore.isLogged === true) {
+            setIsRedirectedToDashboard(true)
+        }
+    }, [userStore.isLogged])
 
     const handleSubmit = async (e: React.FormEvent) => {
         

@@ -31,5 +31,5 @@ interface ILoginUserAction {
 }
 
 interface ILogoutUserAction {
-    (user: IUser): Action
+    (user?: IUser): Action
 }
