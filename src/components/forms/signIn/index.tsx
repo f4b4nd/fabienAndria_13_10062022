@@ -41,7 +41,7 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
         }
 
         async function setUserProfileStoreFromAPI () {
-            
+
             const response = await fetchProfileAPI(userStore.token)
 
             if (response?.status !== 200) return
@@ -132,7 +132,6 @@ const SignInFormStore: React.FC = () => {
     const loginStore: ILoginStore = useCallback((user: IUser) => {
         dispatch(loginUserAction(user))
     }, [dispatch])
-
     
     const getProfileStore: IGetProfileStore = useCallback((user: IUser) => {
         return dispatch(getUserProfileAction(user))

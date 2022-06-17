@@ -1,4 +1,9 @@
+import React, { useState } from "react"
+
+import UpdateProfileForm from "../forms/updateProfile"
+
 import { GroupHeader, Container,  Wrapper, Title, Text, Button } from "./style"
+
 
 interface Props {
     children?: React.ReactNode
@@ -11,19 +16,35 @@ interface RestProps {
 type ChildrenAndRestProps = Props & RestProps
 
 const Account = ({children}: Props) => {
+
     return (
         <Container className="account">
+
             {children}
+
         </Container>
     )
 }
 
 
-Account.GroupHeader = ({userName}: {userName?: string}) => {
+Account.GroupHeader = function GroupHeaderComponent ({userName}: {userName?: string}) {
+    
+    const [formIsDisplayed, setFormIsDisplayed] = useState(false)
+
     return (
-        <GroupHeader className="header"> 
+        <GroupHeader className="header">
+
             <h1>Welcome back <br /> {userName || null} !</h1>
-            <Button className="edit-button">Edit Name</Button>
+
+            <Button 
+                className="edit-button" 
+                onClick={() => setFormIsDisplayed(!formIsDisplayed)}
+            >
+                Edit Name
+            </Button>
+
+            {formIsDisplayed && <UpdateProfileForm />}
+
         </GroupHeader>
     )
 }
