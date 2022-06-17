@@ -38,3 +38,14 @@ export const getUserProfileAction: IGetUserProfileAction = (user) => {
     }
 
 }
+
+export const updateUserProfileAction: IUpdateUserProfileAction = (user) => {
+
+    setUserToLocalStorage(user)
+
+    return {
+        type: 'USER_UPDATE_PROFILE' as ActionType.UPDATE_PROFILE,
+        payload: user
+    }
+
+}

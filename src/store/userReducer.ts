@@ -26,6 +26,9 @@ export const userReducer: IUserReducer = function (state = initialState, action)
         case 'USER_GET_PROFILE':
             return {...state, ...action.payload}
 
+        case 'USER_UPDATE_PROFILE':
+            return {...state, ...action.payload}
+            
         default:
             return state
     }

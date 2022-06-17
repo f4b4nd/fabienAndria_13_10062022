@@ -13,6 +13,7 @@ enum ActionType {
     LOGIN = 'USER_LOG_IN',
     LOGOUT = 'USER_LOG_OUT',
     GET_PROFILE = 'USER_GET_PROFILE',
+    UPDATE_PROFILE = 'USER_UPDATE_PROFILE',
 }
 
 interface ObjectProps {
@@ -20,7 +21,7 @@ interface ObjectProps {
 }
 
 interface Action {
-    type: ActionType.LOGIN | ActionType.LOGOUT | ActionType.GET_PROFILE,
+    type: ActionType.LOGIN | ActionType.LOGOUT | ActionType.GET_PROFILE | ActionType.UPDATE_PROFILE,
     payload?: ObjectProps
 }
 
@@ -41,5 +42,9 @@ interface ILogoutUserAction {
 }
 
 interface IGetUserProfileAction {
+    (user: IUser): Action
+}
+
+interface IUpdateUserProfileAction {
     (user: IUser): Action
 }
