@@ -8,8 +8,7 @@ export const getUserFromLocalStorage = (): IUser | null => {
     if (emailIsEmpty || tokenIsEmpty) return null
 
     return {
-        email: user.email,
-        token: user.token,
+        ...user,
         isLogged: true
     }
 

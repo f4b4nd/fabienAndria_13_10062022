@@ -8,14 +8,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
 import { Container, InputWrapper, CheckboxWrapper, Button } from "./style"
-import { userSelector } from "../../../store/useSelectors"
-import { loginUserAction } from "../../../store/userActions"
+import { userSelector } from "../../../store/userSelectors"
+import { getUserProfileAction, loginUserAction } from "../../../store/userActions"
+
+import { getUserFromLocalStorage } from "../../../helpers/localStorage"
 
 import loginAPI from "../../../helpers/loginAPI"
+import fetchProfileAPI from "../../../helpers/fetchProfileAPI"
 
 import { ROUTES } from "../../../constants"
 
-const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: ILoginStore}) => {
+const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
 
     const [emailInput, setEmailInput] = useState("" as string)
     const [passwordInput, setPasswordInput] = useState("" as string)
@@ -23,10 +26,31 @@ const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: ILog
     const [isRedirectedToDashboard, setIsRedirectedToDashboard] = useState(false as boolean)
     
     useEffect(() => {
+
+        async function fetchProfile () {
+            const response = await fetchProfileAPI(userStore.token)
+
+            if (response?.status === 200) {
+                const userProfile = response?.body
+                getProfileStore({...userStore, ...userProfile})
+            }
+        }
+
         if (userStore.isLogged === true) {
             setIsRedirectedToDashboard(true)
         }
-    }, [userStore.isLogged])
+
+        const localStorageUser = getUserFromLocalStorage()
+        const localStorageProfileIsEmpty = !localStorageUser || localStorageUser?.firstName === ""
+
+        if(!localStorageProfileIsEmpty) {
+            getProfileStore(localStorageUser)
+        } 
+        else {
+            fetchProfile()
+        }
+
+    }, [userStore])
 
     const handleSubmit = async (e: React.FormEvent) => {
         
@@ -35,8 +59,6 @@ const SignInForm = ({userStore, loginStore}: {userStore: IUser, loginStore: ILog
         if (emailInput === "" || passwordInput === "") return
 
         const response = await loginAPI(emailInput, passwordInput)
-
-        console.log('reponse', response)
 
         if (response?.status !== 200) {
             setLoginIsIncorrect(true)
@@ -104,8 +126,53 @@ const SignInFormStore: React.FC = () => {
         dispatch(loginUserAction(user))
     }, [dispatch])
 
-    return <SignInForm userStore={userStore} loginStore={loginStore} />
+    
+    const getProfileStore: IGetProfileStore = useCallback((user: IUser) => {
+        return dispatch(getUserProfileAction(user))
+    }, [dispatch])
+    
+    return (
+        <SignInForm 
+            userStore={userStore} 
+            loginStore={loginStore}
+            getProfileStore={getProfileStore}
+        />
+    )
 
 }
 
 export { SignInFormStore }
+
+/**  
+
+    const localStorageUser = getUserFromLocalStorage()
+    const profileIsEmpty = !localStorageUser || localStorageUser?.firstName === ""
+
+    if (!profileIsEmpty) {
+        return {
+            type: 'USER_GET_PROFILE' as ActionType.GET_PROFILE,
+            payload: localStorageUser
+        }
+    } */
+
+        /*
+    const userProfile = fetchProfileAPI(user.token)
+                        .then(response => response?.body)
+                        .catch(e => console.log(e))        
+
+    const newUserState: IUser = {
+        ...user,
+        firstName: userProfile?.firstName,
+        lastName: user.lastName,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+        id: user.id
+    }
+    
+
+    setUserToLocalStorage(newUserState)
+
+    return {
+        type: 'USER_GET_PROFILE' as ActionType.GET_PROFILE,
+        payload: newUserState
+    }*/

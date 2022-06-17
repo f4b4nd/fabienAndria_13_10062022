@@ -17,11 +17,5 @@ interface ILoginResponse {
 interface IProfileResponse {
     status: number,
     message: string,
-    body?: {
-        email: string,
-        firstName: string,
-        lastName: string,
-        updatedAt: string,
-        id: string
-    }
+    body?: IUserProfile
 }

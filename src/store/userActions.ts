@@ -2,18 +2,18 @@ import { setUserToLocalStorage, removeUserFromLocalStorage } from "../helpers/lo
 
 export const loginUserAction: ILoginUserAction = (user) => {
     
-    const newUser: IUser = {
+    const newUserState: IUser = {
         ...user,
         email: user.email,
         token: user.token,
         isLogged: user.isLogged
     }
 
-    setUserToLocalStorage(newUser)
+    setUserToLocalStorage(newUserState)
 
     return {
         type: 'USER_LOG_IN' as ActionType.LOGIN,
-        payload: newUser
+        payload: newUserState
     }
 
 }
@@ -26,4 +26,15 @@ export const logoutUserAction: ILogoutUserAction = () => {
         type: 'USER_LOG_OUT' as ActionType.LOGOUT,
     }
     
+}
+
+export const getUserProfileAction: IGetUserProfileAction = (user) => {
+
+    setUserToLocalStorage(user)
+
+    return {
+        type: 'USER_GET_PROFILE' as ActionType.GET_PROFILE,
+        payload: user
+    }
+
 }

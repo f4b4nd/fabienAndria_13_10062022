@@ -1,12 +1,18 @@
 interface IUser {
     email: string,
     token: string,
-    isLogged: boolean
+    isLogged: boolean,
+    firstName: string,
+    lastName: string,
+    createdAt: string,
+    updatedAt: string,
+    id: string
 }
 
 enum ActionType {
     LOGIN = 'USER_LOG_IN',
     LOGOUT = 'USER_LOG_OUT',
+    GET_PROFILE = 'USER_GET_PROFILE',
 }
 
 interface ObjectProps {
@@ -14,7 +20,7 @@ interface ObjectProps {
 }
 
 interface Action {
-    type: ActionType.LOGIN | ActionType.LOGOUT,
+    type: ActionType.LOGIN | ActionType.LOGOUT | ActionType.GET_PROFILE,
     payload?: ObjectProps
 }
 
@@ -32,4 +38,8 @@ interface ILoginUserAction {
 
 interface ILogoutUserAction {
     (user?: IUser): Action
+}
+
+interface IGetUserProfileAction {
+    (user: IUser): Action
 }
