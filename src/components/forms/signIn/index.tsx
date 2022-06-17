@@ -27,30 +27,37 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
     
     useEffect(() => {
 
-        async function fetchProfile () {
+        function setUserProfileStore () {
+
+            const localStorageUser = getUserFromLocalStorage()
+            const localStorageProfileIsEmpty = !localStorageUser || localStorageUser?.firstName === ""
+
+            if(!localStorageProfileIsEmpty) {
+                getProfileStore(localStorageUser)
+                return
+            }
+
+            setUserProfileStoreFromAPI()
+        }
+
+        async function setUserProfileStoreFromAPI () {
+            
             const response = await fetchProfileAPI(userStore.token)
 
-            if (response?.status === 200) {
-                const userProfile = response?.body
-                getProfileStore({...userStore, ...userProfile})
-            }
+            if (response?.status !== 200) return
+
+            const userProfile = response?.body
+            getProfileStore({...userStore, ...userProfile})
+        
         }
 
         if (userStore.isLogged === true) {
             setIsRedirectedToDashboard(true)
         }
 
-        const localStorageUser = getUserFromLocalStorage()
-        const localStorageProfileIsEmpty = !localStorageUser || localStorageUser?.firstName === ""
+        setUserProfileStore()
 
-        if(!localStorageProfileIsEmpty) {
-            getProfileStore(localStorageUser)
-        } 
-        else {
-            fetchProfile()
-        }
-
-    }, [userStore])
+    }, [userStore, getProfileStore])
 
     const handleSubmit = async (e: React.FormEvent) => {
         
@@ -142,37 +149,3 @@ const SignInFormStore: React.FC = () => {
 }
 
 export { SignInFormStore }
-
-/**  
-
-    const localStorageUser = getUserFromLocalStorage()
-    const profileIsEmpty = !localStorageUser || localStorageUser?.firstName === ""
-
-    if (!profileIsEmpty) {
-        return {
-            type: 'USER_GET_PROFILE' as ActionType.GET_PROFILE,
-            payload: localStorageUser
-        }
-    } */
-
-        /*
-    const userProfile = fetchProfileAPI(user.token)
-                        .then(response => response?.body)
-                        .catch(e => console.log(e))        
-
-    const newUserState: IUser = {
-        ...user,
-        firstName: userProfile?.firstName,
-        lastName: user.lastName,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-        id: user.id
-    }
-    
-
-    setUserToLocalStorage(newUserState)
-
-    return {
-        type: 'USER_GET_PROFILE' as ActionType.GET_PROFILE,
-        payload: newUserState
-    }*/

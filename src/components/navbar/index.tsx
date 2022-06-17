@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +11,6 @@ import { Container, Link } from "./style"
 
 import { userSelector } from '../../store/userSelectors'
 import { logoutUserAction } from '../../store/userActions'
-import fetchProfileAPI from '../../helpers/fetchProfileAPI'
 
 interface Props {
     children?: React.ReactNode
