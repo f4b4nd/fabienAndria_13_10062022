@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import { useSelector } from "react-redux"
+import { userSelector } from "../../store/userSelectors"
 
 import UpdateProfileForm from "../forms/updateProfile"
 
@@ -27,14 +29,16 @@ const Account = ({children}: Props) => {
 }
 
 
-Account.GroupHeader = function GroupHeaderComponent ({userName}: {userName?: string}) {
+Account.GroupHeader = function GroupHeaderComponent () {
     
+    const user = useSelector(userSelector)
+
     const [formIsDisplayed, setFormIsDisplayed] = useState(false)
 
     return (
         <GroupHeader className="header">
 
-            <h1>Welcome back <br /> {userName || null} !</h1>
+            <h1>Welcome back <br /> {user.firstName} !</h1>
 
             <Button 
                 className="edit-button" 
