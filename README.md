@@ -11,6 +11,8 @@
 
 I made a custom version of [ArgentBank-api](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API) with **Docker-compose** to simplify its utilization.
 
+My custom repo is available here : [ArgentBank-api-docker-compose](https://github.com/f4b4nd/ArgentBank_API_docker-compose)
+
 You can clone this custom repository with the following command :
 
 `git clone https://github.com/f4b4nd/ArgentBank_API_docker-compose.git`
