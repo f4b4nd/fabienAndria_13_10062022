@@ -1,7 +1,7 @@
 # Project 13
 
 
-## 1. How to run Backend: 
+## 1. How to run Backend + MongoDB Database: 
 
 ### 1.1 Prerequisites :
 - Docker
@@ -18,13 +18,14 @@ You can clone this custom repository with the following command :
 `git clone https://github.com/f4b4nd/ArgentBank_API_docker-compose.git`
 
 
-### 1.3 Launch backend
+### 1.3 Launch backend + MongoDB
 - Get into the folder : `cd ./ArgentBank_API_docker-compose/`
 - Run the commmand : `docker-compose up`
 - Backend is now available on `port 3001`
 
 ### 1.4 Add Data to MongoDB via backend
-- Exec the backend container via the following command : `docker exec -it bank-api /bin/sh`
+- After running `docker-compose up`, you should have 2 containers running: `bank-api` and `bank-mongodb`
+- Execute backend container via the following command : `docker exec -it bank-api /bin/sh`
 - Inside the container, run the following command: `npm run populate-db`
 ---
 
