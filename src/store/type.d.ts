@@ -9,6 +9,8 @@ interface IUser {
     id: string
 }
 
+type IUserProfile = Omit<IUser, "email" | "token" | "isLogged">
+
 enum ActionType {
     LOGIN = 'USER_LOG_IN',
     LOGOUT = 'USER_LOG_OUT',

@@ -2,14 +2,14 @@ interface ILoginStore {
     (user: IUser): void
 }
 
-interface IGetProfileStore {
+interface ISetProfileStore {
     (user: IUser): void
 }
 
 interface ISignInForm {
     userStore: IUser,
     loginStore: ILoginStore;
-    getProfileStore: IGetProfileStore
+    setProfileStore: ISetProfileStore
 }
 
 interface ICredentials {

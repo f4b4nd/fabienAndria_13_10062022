@@ -1,54 +1,23 @@
-import { useCallback, useEffect, useState } from "react"
-
+import { useCallback, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
 import { Container, InputWrapper, CheckboxWrapper, Button } from "./style"
+
 import { userSelector } from "../../../store/userSelectors"
 import { getUserProfileAction, loginUserAction } from "../../../store/userActions"
 
-import { getUserFromLocalStorage } from "../../../helpers/localStorage"
-
 import loginAPI from "../../../helpers/loginAPI"
-import fetchProfileAPI from "../../../helpers/fetchProfileAPI"
+import getUserProfile from "../../../helpers/getUserProfile"
 
 
-const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
+const SignInForm = ({userStore, loginStore, setProfileStore}: ISignInForm) => {
 
     const [credentials, setCredentials] = useState<ICredentials>({email: "", password: ""})
     const [loginIsIncorrect, setLoginIsIncorrect] = useState<boolean>(false)
     
-    useEffect(() => {
-
-        function setUserProfileStore () {
-
-            const localStorageUser = getUserFromLocalStorage()
-            const localStorageProfileIsEmpty = !localStorageUser || localStorageUser?.firstName === ""
-
-            if(!localStorageProfileIsEmpty) {
-                getProfileStore(localStorageUser)
-                return
-            }
-
-            setUserProfileStoreFromAPI()
-        }
-
-        async function setUserProfileStoreFromAPI () {
-
-            const response = await fetchProfileAPI(userStore.token)
-
-            if (response?.status !== 200) return
-
-            const userProfile = response?.body
-            getProfileStore({...userStore, ...userProfile})
-        
-        }
-
-        setUserProfileStore()
-
-    }, [userStore, getProfileStore])
 
     const handleSubmit = async (e: React.FormEvent) => {
         
@@ -71,6 +40,10 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
         }
 
         loginStore(newUserState)
+
+        const userProfile = await getUserProfile(newUserState.token)
+        console.log('yes', userProfile)
+        setProfileStore({...newUserState, ...userProfile})
         setLoginIsIncorrect(false)
 
     }
@@ -127,15 +100,15 @@ const SignInFormStore: React.FC = () => {
         dispatch(loginUserAction(user))
     }, [dispatch])
     
-    const getProfileStore: IGetProfileStore = useCallback((user: IUser) => {
-        return dispatch(getUserProfileAction(user))
+    const setProfileStore: ISetProfileStore = useCallback((user: IUser) => {
+        dispatch(getUserProfileAction(user))
     }, [dispatch])
     
     return (
         <SignInForm 
             userStore={userStore} 
             loginStore={loginStore}
-            getProfileStore={getProfileStore}
+            setProfileStore={setProfileStore}
         />
     )
 
