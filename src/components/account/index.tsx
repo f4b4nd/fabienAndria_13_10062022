@@ -38,7 +38,7 @@ Account.GroupHeader = function GroupHeaderComponent () {
     return (
         <GroupHeader className="header">
 
-            <h1>Welcome back <br /> {user.firstName} !</h1>
+            <h1>Welcome back <br /> {user.firstName ? user.firstName + " !" : ""}</h1>
 
             <Button 
                 className="edit-button" 

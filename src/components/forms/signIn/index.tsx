@@ -20,8 +20,7 @@ import IsUserRedirect from "../../../helpers/IsUserRedirect"
 
 const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
 
-    const [emailInput, setEmailInput] = useState<string>("")
-    const [passwordInput, setPasswordInput] = useState<string>("")
+    const [credentials, setCredentials] = useState<ICredentials>({email: "", password: ""})
     const [loginIsIncorrect, setLoginIsIncorrect] = useState<boolean>(false)
     
     useEffect(() => {
@@ -58,9 +57,9 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
         
         e.preventDefault()
 
-        if (emailInput === "" || passwordInput === "") return
+        if (credentials.email === "" || credentials.password === "") return
 
-        const response = await loginAPI(emailInput, passwordInput)
+        const response = await loginAPI(credentials.email, credentials.password)
 
         if (response?.status !== 200) {
             setLoginIsIncorrect(true)
@@ -69,7 +68,7 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
 
         const newUserState: IUser = {
             ...userStore,
-            email: emailInput,
+            email: credentials.email,
             token: response?.body?.token || "", 
             isLogged: true
         }
@@ -90,12 +89,12 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
                 
                 <InputWrapper className="input-wrapper">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" value={emailInput} onChange={(e) => setEmailInput(e.target.value)}/>
+                    <input type="text" id="username" value={credentials.email} onChange={(e) => setCredentials({...credentials, email: e.target.value})}/>
                 </InputWrapper>
 
                 <InputWrapper className="input-wrapper">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)}/>
+                    <input type="password" id="password" value={credentials.password} onChange={(e) => setCredentials({...credentials, password: e.target.value})} />
                 </InputWrapper>
 
                 <CheckboxWrapper className="input-remember">

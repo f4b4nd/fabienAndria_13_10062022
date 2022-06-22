@@ -11,3 +11,8 @@ interface ISignInForm {
     loginStore: ILoginStore;
     getProfileStore: IGetProfileStore
 }
+
+interface ICredentials {
+    email: string,
+    password: string,
+}
