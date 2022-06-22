@@ -5,7 +5,7 @@ import { userSelector } from "../../../store/userSelectors"
 import { updateUserProfileAction } from "../../../store/userActions"
 import { Container, InputWrapper, Button, Row } from "./style"
 
-import updateProfileAPI from "../../../helpers/updateProfileAPI"
+import updateUserProfileAPI from "../../../helpers/updateUserProfileAPI"
 
 const UpdateProfileForm = () => {
 
@@ -31,8 +31,10 @@ const UpdateProfileForm = () => {
             lastName: lastName,
         }
 
-        const newUserState = await updateProfileAPI(user.token, newProfile)
-        updateProfile({...user, ...newUserState?.body})
+        const response: IProfileResponse | undefined = await updateUserProfileAPI(user.token, newProfile)
+        if (response?.body) {
+            updateProfile({...user, ...response.body})
+        }
 
     }
 

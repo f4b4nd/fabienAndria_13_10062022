@@ -6,7 +6,7 @@ interface IFetchProfileAPI {
     (token: string): Promise<IProfileResponse | undefined>
 }
 
-interface IUpdateProfileAPI {
+interface IUpdateUserProfileAPI {
     (token: string, newProfile: {firstName: string, lastName: string}): Promise<IProfileResponse | undefined>
 }
 

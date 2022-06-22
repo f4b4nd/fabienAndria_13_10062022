@@ -42,7 +42,6 @@ const SignInForm = ({userStore, loginStore, setProfileStore}: ISignInForm) => {
         loginStore(newUserState)
 
         const userProfile = await getUserProfile(newUserState.token)
-        console.log('yes', userProfile)
         setProfileStore({...newUserState, ...userProfile})
         setLoginIsIncorrect(false)
 

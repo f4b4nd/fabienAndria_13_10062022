@@ -1,6 +1,6 @@
 import { ENDPOINTS_API } from "../constants"
 
-const updateProfileAPI: IUpdateProfileAPI = async (token, newProfile) => {
+const updateUserProfileAPI: IUpdateUserProfileAPI = async (token, newProfile) => {
 
     const apiURL = process.env.REACT_APP_API_URL || "http://localhost:3001/api/v1"
 
@@ -25,4 +25,4 @@ const updateProfileAPI: IUpdateProfileAPI = async (token, newProfile) => {
 
 }
 
-export default updateProfileAPI
+export default updateUserProfileAPI

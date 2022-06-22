@@ -1,6 +1,6 @@
 import { getUserFromLocalStorage } from "./localStorage"
 
-import { ENDPOINTS_API } from "../constants"
+import fetchUserProfileFromAPI from "./fetchUserProfileAPI"
 
 export default async function getUserProfile (token: string) {
     
@@ -20,10 +20,10 @@ export default async function getUserProfile (token: string) {
         return userProfile            
     }
     
-    const APIresponse = await fetchUserProfileFromAPI(token)
+    const response = await fetchUserProfileFromAPI(token)
     
-    if (APIresponse?.status === 200 && APIresponse.body) {
-        const userProfileFromAPI: IUserProfile = APIresponse.body
+    if (response?.status === 200 && response.body) {
+        const userProfileFromAPI: IUserProfile = response.body
         return userProfileFromAPI     
     }
 
@@ -32,26 +32,3 @@ export default async function getUserProfile (token: string) {
 }
 
 
-async function fetchUserProfileFromAPI (token: string) {
-
-    const requestOptions = {
-        method: 'POST',
-        headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
-    }
-
-    const apiURL = process.env.REACT_APP_API_URL || "http://localhost:3001/api/v1"
-    
-    if (token === "") return
-
-    const endpoint = ENDPOINTS_API.PROFILE
-    
-    const response = await fetch(apiURL + endpoint, requestOptions)
-    
-    const JSONresponse: IProfileResponse = await response.json()
-
-    return JSONresponse
-
-}
