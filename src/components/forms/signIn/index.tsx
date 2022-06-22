@@ -14,9 +14,6 @@ import { getUserFromLocalStorage } from "../../../helpers/localStorage"
 import loginAPI from "../../../helpers/loginAPI"
 import fetchProfileAPI from "../../../helpers/fetchProfileAPI"
 
-import { ROUTES } from "../../../constants"
-
-import IsUserRedirect from "../../../helpers/IsUserRedirect"
 
 const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
 
@@ -89,12 +86,20 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
                 
                 <InputWrapper className="input-wrapper">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" value={credentials.email} onChange={(e) => setCredentials({...credentials, email: e.target.value})}/>
+                    <input 
+                        type="text" id="username" 
+                        value={credentials.email} 
+                        onChange={(e) => setCredentials({...credentials, email: e.target.value})}
+                    />
                 </InputWrapper>
 
                 <InputWrapper className="input-wrapper">
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" value={credentials.password} onChange={(e) => setCredentials({...credentials, password: e.target.value})} />
+                    <input 
+                        type="password" id="password" 
+                        value={credentials.password} 
+                        onChange={(e) => setCredentials({...credentials, password: e.target.value})} 
+                    />
                 </InputWrapper>
 
                 <CheckboxWrapper className="input-remember">
@@ -127,13 +132,11 @@ const SignInFormStore: React.FC = () => {
     }, [dispatch])
     
     return (
-        <IsUserRedirect user={userStore} loggedInPath={ROUTES.DASHBOARD}>
-            <SignInForm 
-                userStore={userStore} 
-                loginStore={loginStore}
-                getProfileStore={getProfileStore}
-            />
-        </IsUserRedirect>
+        <SignInForm 
+            userStore={userStore} 
+            loginStore={loginStore}
+            getProfileStore={getProfileStore}
+        />
     )
 
 }
