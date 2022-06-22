@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
 
-import { Navigate } from "react-router-dom"
-
 import { useDispatch, useSelector } from "react-redux"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -18,12 +16,13 @@ import fetchProfileAPI from "../../../helpers/fetchProfileAPI"
 
 import { ROUTES } from "../../../constants"
 
+import IsUserRedirect from "../../../helpers/IsUserRedirect"
+
 const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
 
-    const [emailInput, setEmailInput] = useState("" as string)
-    const [passwordInput, setPasswordInput] = useState("" as string)
-    const [loginIsIncorrect, setLoginIsIncorrect] = useState(false as boolean)
-    const [isRedirectedToDashboard, setIsRedirectedToDashboard] = useState(false as boolean)
+    const [emailInput, setEmailInput] = useState<string>("")
+    const [passwordInput, setPasswordInput] = useState<string>("")
+    const [loginIsIncorrect, setLoginIsIncorrect] = useState<boolean>(false)
     
     useEffect(() => {
 
@@ -49,10 +48,6 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
             const userProfile = response?.body
             getProfileStore({...userStore, ...userProfile})
         
-        }
-
-        if (userStore.isLogged === true) {
-            setIsRedirectedToDashboard(true)
         }
 
         setUserProfileStore()
@@ -81,14 +76,10 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
 
         loginStore(newUserState)
         setLoginIsIncorrect(false)
-        setIsRedirectedToDashboard(true)
 
     }
 
     return (
-        <>
-        { isRedirectedToDashboard && <Navigate to={ROUTES.DASHBOARD} /> }
-
         <Container className="sign-in-content">
 
             <FontAwesomeIcon icon={faUserCircle} className="sign-in-icon" />
@@ -119,7 +110,6 @@ const SignInForm = ({userStore, loginStore, getProfileStore}: ISignInForm) => {
             </form>
 
         </Container>
-        </>
     )
 }
 
@@ -138,11 +128,13 @@ const SignInFormStore: React.FC = () => {
     }, [dispatch])
     
     return (
-        <SignInForm 
-            userStore={userStore} 
-            loginStore={loginStore}
-            getProfileStore={getProfileStore}
-        />
+        <IsUserRedirect user={userStore} loggedInPath={ROUTES.DASHBOARD}>
+            <SignInForm 
+                userStore={userStore} 
+                loginStore={loginStore}
+                getProfileStore={getProfileStore}
+            />
+        </IsUserRedirect>
     )
 
 }

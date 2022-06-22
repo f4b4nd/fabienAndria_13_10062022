@@ -23,3 +23,9 @@ interface IProfileResponse {
     message: string,
     body?: IUserProfile
 }
+
+interface IIsUserRedirect {
+    user: IUser, 
+    loggedInPath: IRoutes[keyof IRoutes],
+    children: React.ReactNode
+}
