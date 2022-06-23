@@ -7,7 +7,7 @@ import { faSignOut, faUserCircle } from "@fortawesome/free-solid-svg-icons"
 import Logo from "../../assets/logos/argentBankLogo.png"
 import { ROUTES } from "../../constants"
 
-import { Container, Link } from "./style"
+import { Container, Link, Items } from "./style"
 
 import { userSelector } from '../../store/userSelectors'
 import { logoutUserAction } from '../../store/userActions'
@@ -27,11 +27,13 @@ const Navbar = function NavBarComponent ({children}: Props) {
 
             {children}
 
-            {user.isLogged && <Navbar.User userName={user?.firstName}/>}
+            <Items>
+                {user.isLogged && <Navbar.User userName={user?.firstName}/>}
 
-            {!user.isLogged && <Navbar.SignIn /> }
+                {!user.isLogged && <Navbar.SignIn /> }
 
-            {user.isLogged && <Navbar.SignOut /> }
+                {user.isLogged && <Navbar.SignOut /> }
+            </Items>
 
         </Container>
     )
@@ -66,7 +68,7 @@ Navbar.SignIn = () => {
         <div className="navbar__sign-in">
             <Link className="main-nav-item" to={ROUTES.SIGN_IN}>
                 <FontAwesomeIcon icon={faUserCircle} />
-                Sign In
+                <span> Sign In</span>
             </Link>
         </div>
     )
@@ -93,7 +95,7 @@ Navbar.SignOut = function SignoutStore () {
 
                 <FontAwesomeIcon icon={faSignOut} />
 
-                Sign Out
+                <span> Sign Out </span>
 
             </Link>
 

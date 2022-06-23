@@ -24,7 +24,7 @@ export const Link = styled(RouterLink)`
         text-decoration: none;
         margin-right: 0.5rem;
         display: flex;
-        align-items: space-between;
+        align-items: center;
         column-gap: 0.2em;
 
         &:hover {
@@ -43,4 +43,11 @@ export const Link = styled(RouterLink)`
         }
     }
 
+`
+
+export const Items = styled.div`
+    display: flex;
+    align-items: center ;
+    justify-self: right;
+    column-gap: 0.5em;
 `

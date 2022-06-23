@@ -9,16 +9,13 @@ export const Container = styled.form`
     width: 300px;
 `
 
-export const InputWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+export const InputWrapper = styled.div`    
     margin-bottom: 1rem;
-    flex-basis: 40%;
 
     input {
         padding: 5px;
         font-size: 1.2rem;
+        max-width: 200px;
     }
 
 `
@@ -36,4 +33,22 @@ export const Button = styled.button`
 
 export const Row = styled.div`
     display: flex;
+    justify-content: center;
+    column-gap: 1em;
+
+    @media screen and (max-width: 600px) {
+        &.inputs {
+            flex-direction: column;
+
+            .input-wrapper {
+                width: 100%;
+                overflow: hidden;  
+            }
+
+            input {
+                width: 100%;
+                max-width: 100%;
+            }        
+        }
+    }
 `

@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react"
+import React, { useState, useCallback } from "react"
 import { useSelector, useDispatch} from 'react-redux'
 import { userSelector } from "../../../store/userSelectors"
 
@@ -7,12 +7,12 @@ import { Container, InputWrapper, Button, Row } from "./style"
 
 import updateUserProfileAPI from "../../../helpers/updateUserProfileAPI"
 
-const UpdateProfileForm = () => {
+const UpdateProfileForm = ({setFormIsDisplayed}: {setFormIsDisplayed: any}) => {
 
     const user = useSelector(userSelector)
 
-    const [firstName, setFirstName] = useState("" as string)
-    const [lastName, setLastName] = useState("" as string)
+    const [firstName, setFirstName] = useState<string>("")
+    const [lastName, setLastName] = useState<string>("")
     
     const dispatch = useDispatch()
 
@@ -38,24 +38,28 @@ const UpdateProfileForm = () => {
 
     }
 
+    const hideForm = (e: React.FormEvent) => {
+        e.preventDefault()
+        setFormIsDisplayed(false)
+    }
+
     return (
         <Container>
 
-            <InputWrapper className="input-wrapper">
-                <label htmlFor="firstname">Firstname</label>
-                <input type="text" id="firstname" placeholder={user.firstName} value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-            </InputWrapper>
+            <Row className="inputs">
+                <InputWrapper className="input-wrapper">
+                    <input type="text" id="firstname" placeholder={user.firstName} value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                </InputWrapper>
 
-            <InputWrapper className="input-wrapper">
-                <label htmlFor="lastname">Lastname</label>
-                <input type="text" id="lastname" placeholder={user.lastName} value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-            </InputWrapper>
-
+                <InputWrapper className="input-wrapper">
+                    <input type="text" id="lastname" placeholder={user.lastName} value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+                </InputWrapper>
+            </Row>
 
             <Row>
                 <Button onClick={(e) => handleSubmit(e)}> Save </Button>
                 
-                <Button> Cancel </Button>
+                <Button onClick={(e) => hideForm(e)}> Cancel </Button>
             </Row>
 
         </Container>

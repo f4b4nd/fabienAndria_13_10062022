@@ -33,7 +33,7 @@ Account.GroupHeader = function GroupHeaderComponent () {
     
     const user = useSelector(userSelector)
 
-    const [formIsDisplayed, setFormIsDisplayed] = useState(false)
+    const [formIsDisplayed, setFormIsDisplayed] = useState<boolean>(false)
 
     return (
         <GroupHeader className="header">
@@ -47,7 +47,7 @@ Account.GroupHeader = function GroupHeaderComponent () {
                 Edit Name
             </Button>
 
-            {formIsDisplayed && <UpdateProfileForm />}
+            {formIsDisplayed && <UpdateProfileForm setFormIsDisplayed={setFormIsDisplayed}/>}
 
         </GroupHeader>
     )

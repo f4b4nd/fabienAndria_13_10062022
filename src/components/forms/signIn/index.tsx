@@ -18,7 +18,6 @@ const SignInForm = ({userStore, loginStore, setProfileStore}: ISignInForm) => {
     const [credentials, setCredentials] = useState<ICredentials>({email: "", password: ""})
     const [loginIsIncorrect, setLoginIsIncorrect] = useState<boolean>(false)
     
-
     const handleSubmit = async (e: React.FormEvent) => {
         
         e.preventDefault()
@@ -40,10 +39,10 @@ const SignInForm = ({userStore, loginStore, setProfileStore}: ISignInForm) => {
         }
 
         loginStore(newUserState)
+        setLoginIsIncorrect(false)
 
         const userProfile = await getUserProfile(newUserState.token)
         setProfileStore({...newUserState, ...userProfile})
-        setLoginIsIncorrect(false)
 
     }
 
