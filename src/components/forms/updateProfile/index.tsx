@@ -7,7 +7,11 @@ import { Container, InputWrapper, Button, Row } from "./style"
 
 import updateUserProfileAPI from "../../../helpers/updateUserProfileAPI"
 
-const UpdateProfileForm = ({setFormIsDisplayed}: {setFormIsDisplayed: any}) => {
+interface Props {
+    setFormIsDisplayed: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const UpdateProfileForm = ({setFormIsDisplayed}: Props) => {
 
     const user = useSelector(userSelector)
 
