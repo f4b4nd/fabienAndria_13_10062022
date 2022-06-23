@@ -55,7 +55,7 @@ Navbar.User = ({userName}: {userName: string}) => {
         <div className="navbar__user"> 
             <Link className="main-nav-item" to={ROUTES.DASHBOARD}>
                 <FontAwesomeIcon icon={faUserCircle} />
-                {userName}
+                <span> {userName}</span>
             </Link>
         </div>
     )

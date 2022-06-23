@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes,  Route } from 'react-router-dom'
 import { useSelector } from "react-redux"
 
 import IsUserRedirect from "./helpers/IsUserRedirect"
+import ProtectedRoute from './helpers/ProtectedRoute'
+
 import { userSelector } from "./store/userSelectors"
 
 
@@ -33,7 +35,11 @@ function App () {
                     </>
                 }/>
 
-                <Route path={ROUTES.DASHBOARD} element={ <DashboardPage /> }/>
+                <Route path={ROUTES.DASHBOARD} element={
+                    <ProtectedRoute user={userStore}>
+                        <DashboardPage /> 
+                    </ProtectedRoute>
+                }/>
 
             </Routes>
 

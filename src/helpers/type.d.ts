@@ -29,3 +29,8 @@ interface IIsUserRedirect {
     loggedInPath: IRoutes[keyof IRoutes],
     children: React.ReactNode
 }
+
+interface IProtectedRoute {
+    user: IUser, 
+    children: React.ReactNode
+}

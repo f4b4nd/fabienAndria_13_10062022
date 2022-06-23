@@ -23,6 +23,9 @@ export const Link = styled(RouterLink)`
     &.main-nav-item {
         text-decoration: none;
         margin-right: 0.5rem;
+        display: flex;
+        align-items: space-between;
+        column-gap: 0.2em;
 
         &:hover {
             text-decoration: underline;
